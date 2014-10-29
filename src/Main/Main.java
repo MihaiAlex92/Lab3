@@ -27,7 +27,7 @@ public class Main {
             mobil_htc.callContact("Iulian");
             mobil_htc.getMobileInfo();
             mobil_htc.printContactNumber("Mihai");
-            mobil_nokia.getMobileInfo();
+            //mobil_nokia.getMobileInfo();
             mobil_nokia.testForWirelessConnection();
             mobil_htc.testForWirelessConnection();
             mobil_htc.chargeBattery();
