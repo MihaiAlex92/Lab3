@@ -12,6 +12,7 @@ import com.packet.Utils.Constants;
  */
 public class Nokia extends Mobile implements IPhone {
 
+
     /**
      * Constructer used for a "Nokia" class object which initializes all members
      *
@@ -27,21 +28,97 @@ public class Nokia extends Mobile implements IPhone {
     @Override
     public void callContact(String contactName) throws MobileException {
 
+        if (!isPower_ON())
+            throw new MobileException(Constants.EX_MSG_POWERED_OFF);
+
+        if (this.battery - Constants.BATTERY_NOKIA_DISCHARGE_VALUE < 0)
+            throw new MobileException(Constants.EX_MSG_BATTERY_LEVEL);
+
+        /* searching for the contact in the primary contact list of the mobile phone */
+        boolean contactExists = false;
+        for (String item : this.primaryContacts) {
+            if (item.equals(contactName)) {
+                contactExists = true;
+                break;
+            }
+
+        }
+        ///////////////////////////////////////////////////////////////////////////////
+
+        if (!contactExists)
+            throw new MobileException(Constants.EX_MSG_CONTACT_NAME);
+
+        this.consumeBattery();
+        System.out.println(Constants.SUCCES_CALL_NOKIA + contactName);
+
     }
 
     @Override
     public void sendMessage(String contactName) throws MobileException {
 
+        if (!isPower_ON())
+            throw new MobileException(Constants.EX_MSG_POWERED_OFF);
+
+        if (this.battery - Constants.BATTERY_NOKIA_DISCHARGE_VALUE < 0)
+            throw new MobileException(Constants.EX_MSG_BATTERY_LEVEL);
+
+        /* searching for the contact in the primary contact list of the mobile phone */
+        boolean contactExists = false;
+        for (String item : this.primaryContacts) {
+            if (item.equals(contactName)) {
+                contactExists = true;
+                break;
+            }
+
+        }
+        ////////////////////////////////////////////////
+
+        if (!contactExists)
+            throw new MobileException(Constants.EX_MSG_CONTACT_NAME);
+
+        this.consumeBattery();
+        System.out.println(Constants.SUCCES_MESSAGE + contactName);
+
+
     }
 
     @Override
     public boolean testForWirelessConnection() {
+        System.out.println(Constants.WIRELESS_CONNECTION_OFF);
         return false;
     }
 
     @Override
     public int printContactNumber(String contactName) throws MobileException {
-        return 0;
+
+        if (!isPower_ON())
+            throw new MobileException(Constants.EX_MSG_POWERED_OFF);
+
+        if (this.battery - Constants.BATTERY_NOKIA_DISCHARGE_VALUE < 0)
+            throw new MobileException(Constants.EX_MSG_BATTERY_LEVEL);
+
+        /* searching for the contact in the primary contact list of the mobile phone */
+        boolean contactExists = false;
+        for (String item : this.primaryContacts) {
+            if (item.equals(contactName)) {
+                contactExists = true;
+                break;
+            }
+
+        }
+
+        ////////////////////////////////////////////////////
+
+        if (!contactExists) {
+            System.out.println(Constants.EX_MSG_CONTACT_NAME);
+            return Constants.GENERAL_ERROR_VALUE;
+        }
+
+        System.out.println(Constants.SUCCES_PHONE_NUMBER + contactName);
+        this.consumeBattery();
+        return Constants.SUCCES_VALUE;
+
+
     }
 
 
@@ -51,7 +128,7 @@ public class Nokia extends Mobile implements IPhone {
         System.out.println("");
         System.out.println("Mobile Producer: " + this.get_mName());
         System.out.println("Model: " + this.get_mModel());
-        String status = "";
+        String status;
         if (this.isPower_ON())
             status = "ON";
         else
@@ -64,10 +141,13 @@ public class Nokia extends Mobile implements IPhone {
             status = "NOT CONNECTED";
         System.out.println("Phone Connection Status: " + status);
         System.out.println("Battery Level: " + this.getBattery());
+        this.consumeBattery();
     }
 
     @Override
-    public void consumeBattery() {
-        this.battery -=Constants.BATTERY_NOKIA_DISCHARGE_VALUE;
+    protected void consumeBattery() {
+        this.battery -= Constants.BATTERY_NOKIA_DISCHARGE_VALUE;
+        if (this.battery <= 0)
+            set_Power_ON(false);
     }
 }

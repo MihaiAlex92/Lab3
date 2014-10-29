@@ -9,7 +9,8 @@ import com.packet.Utils.Constants;
  */
 public abstract class Mobile {
 
-    protected int battery=100; /* The battery level of a mobile phone; it drops down by 10 when a method is called */
+    protected int battery = 100; /* The battery level of a mobile phone; it drops down when a method is called */
+    protected String primaryContacts[] = {"Salvare", "Pompieri", "Politia", "Ajutor", "Iulian"}; /*A primary list of contacts each phone must have*/
     private String mName; /* The name of the mobile phone producer */
     private String mModel; /*The model of the mobile phone */
     private boolean power_ON = false; /* state of the mobile phone to check if it is powered on/off */
@@ -118,13 +119,24 @@ public abstract class Mobile {
      */
     public abstract void getMobileInfo();
 
-    public abstract void consumeBattery();
+    /**
+     * called inside the interface methods in order to simulate the consumption of the battery power level.
+     */
+    protected abstract void consumeBattery();
 
+    /**
+     * charges the battery of a mobile phone device by incrementing its' battery level.
+     */
     public void chargeBattery() {
         this.battery += Constants.BATTERY_CHARGE_VALUE;
 
     }
 
+    /**
+     * returns the current value of the battery level of a phone device
+     *
+     * @return <code>int</code>
+     */
     public int getBattery() {
         return battery;
     }
