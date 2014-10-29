@@ -138,7 +138,7 @@ public class HTC extends Mobile implements IPhone {
 
 
         if (!contactExists) {
-            System.out.println(Constants.EX_MSG_CONTACT_NAME);
+            System.out.println(Constants.ERROR_CONTACT_NAME);
             return Constants.GENERAL_ERROR_VALUE;
         }
 

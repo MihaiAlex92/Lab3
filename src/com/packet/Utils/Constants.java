@@ -9,21 +9,24 @@ package com.packet.Utils;
  */
 public class Constants {
 
-    public static final String EX_MSG_POWERED_OFF = "EXCEPTION: THE DEVICE IS TURNED OFF! PLEASE START THE PHONE AND RECHARGE THE BATTERY!";
-    public static final String EX_MSG_CONTACT_NAME = "EXCEPTION: THE SPECIFIED CONTACT DOES NOT EXIST IN THE PHONE'S AGENDA!";
-    public static final String EX_MSG_BATTERY_LEVEL = "EXCEPTION: THE CURRENT LEVEL OF BATTERY DOES NOT ALLOW THE REQUESTED OPERATION TO PERFORM.";
+    /*Constants for Exceptions*/
+    public static final String EX_MSG_POWERED_OFF = "THE DEVICE IS TURNED OFF! PLEASE START THE PHONE AND RECHARGE THE BATTERY!";
+    public static final String EX_MSG_CONTACT_NAME = "THE SPECIFIED CONTACT DOES NOT EXIST IN THE PHONE'S AGENDA!";
+    public static final String EX_MSG_BATTERY_LEVEL = "THE CURRENT LEVEL OF BATTERY DOES NOT ALLOW THE REQUESTED OPERATION TO PERFORM.";
 
+    /*Constants for functions */
     public static final String WIRELESS_CONNECTION_OFF = "This phone does not have a wireless connection adaptor.";
     public static final String SUCCES_CALL_HTC = "The following contact has been called from a HTC: ";
     public static final String SUCCES_CALL_NOKIA = "The following contact has been called from a Nokia: ";
     public static final String SUCCES_MESSAGE = "The following contact has been messaged: ";
     public static final String SUCCES_PHONE_NUMBER = "The following contact has a valid phone number: ";
-
-
+    public static final String ERROR_CONTACT_NAME = "The specified contact does not exist!";
     public static final int BATTERY_CHARGE_VALUE = 17;
     public static final int BATTERY_HTC_DISCHARGE_VALUE = 15;
     public static final int BATTERY_NOKIA_DISCHARGE_VALUE = 7;
 
+
+    /*Constants for return values*/
     public static final int GENERAL_ERROR_VALUE = -1284;
     public static final int SUCCES_VALUE = 0;
 
