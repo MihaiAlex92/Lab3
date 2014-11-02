@@ -53,7 +53,7 @@ public class Nokia extends Mobile implements IPhone {
     @Override
     public void sendMessage(String contactName) throws MobileException {
 
-        //  this.testForMobileException();
+          this.testForMobileException();
 
         /* searching for the contact in the primary contact list of the mobile phone */
         boolean contactExists = false;
@@ -125,7 +125,7 @@ public class Nokia extends Mobile implements IPhone {
     @Override
     public void getMobileInfo() throws MobileException {
 
-        testForMobileException();
+        this.testForMobileException();
 
         this.consumeBattery();
         System.out.println("INFORMATION ABOUT THIS MOBILE DEVICE:");
