@@ -25,14 +25,11 @@ public class Nokia extends Mobile implements IPhone {
         super(mName, mModel, power_ON, is_connected_to_mobile_network);
     }
 
+
     @Override
     public void callContact(String contactName) throws MobileException {
 
-        if (!isPower_ON())
-            throw new MobileException(Constants.EX_MSG_POWERED_OFF);
-
-        if (this.battery - Constants.BATTERY_NOKIA_DISCHARGE_VALUE < 0)
-            throw new MobileException(Constants.EX_MSG_BATTERY_LEVEL);
+        this.testForMobileException();
 
         /* searching for the contact in the primary contact list of the mobile phone */
         boolean contactExists = false;
@@ -56,11 +53,7 @@ public class Nokia extends Mobile implements IPhone {
     @Override
     public void sendMessage(String contactName) throws MobileException {
 
-        if (!isPower_ON())
-            throw new MobileException(Constants.EX_MSG_POWERED_OFF);
-
-        if (this.battery - Constants.BATTERY_NOKIA_DISCHARGE_VALUE < 0)
-            throw new MobileException(Constants.EX_MSG_BATTERY_LEVEL);
+        //  this.testForMobileException();
 
         /* searching for the contact in the primary contact list of the mobile phone */
         boolean contactExists = false;
@@ -91,11 +84,8 @@ public class Nokia extends Mobile implements IPhone {
     @Override
     public int printContactNumber(String contactName) throws MobileException {
 
-        if (!isPower_ON())
-            throw new MobileException(Constants.EX_MSG_POWERED_OFF);
+        this.testForMobileException();
 
-        if (this.battery - Constants.BATTERY_NOKIA_DISCHARGE_VALUE < 0)
-            throw new MobileException(Constants.EX_MSG_BATTERY_LEVEL);
 
         /* searching for the contact in the primary contact list of the mobile phone */
         boolean contactExists = false;
@@ -121,33 +111,47 @@ public class Nokia extends Mobile implements IPhone {
 
     }
 
+    @Override
+    public void testForMobileException() throws MobileException {
+
+        if (!this.isPowerON())
+            throw new MobileException(Constants.EX_MSG_POWERED_OFF);
+
+        if (this.battery - Constants.BATTERY_NOKIA_DISCHARGE_VALUE < 0)
+            throw new MobileException(Constants.EX_MSG_BATTERY_LEVEL);
+    }
+
 
     @Override
-    public void getMobileInfo() {
+    public void getMobileInfo() throws MobileException {
+
+        testForMobileException();
+
+        this.consumeBattery();
         System.out.println("INFORMATION ABOUT THIS MOBILE DEVICE:");
         System.out.println("");
-        System.out.println("Mobile Producer: " + this.get_mName());
-        System.out.println("Model: " + this.get_mModel());
+        System.out.println("Mobile Producer: " + this.getMobileName());
+        System.out.println("Model: " + this.getMobileModel());
         String status;
-        if (this.isPower_ON())
+        if (this.isPowerON())
             status = "ON";
         else
             status = "OFF";
         System.out.println("Power Status: " + status);
 
-        if (this.is_connected_to_mobile_network())
+        if (this.isConnectedToMobileNetwork())
             status = "CONNECTED";
         else
             status = "NOT CONNECTED";
         System.out.println("Phone Connection Status: " + status);
         System.out.println("Battery Level: " + this.getBattery());
-        this.consumeBattery();
+
     }
 
     @Override
     protected void consumeBattery() {
         this.battery -= Constants.BATTERY_NOKIA_DISCHARGE_VALUE;
         if (this.battery <= 0)
-            set_Power_ON(false);
+            this.setPowerON(false);
     }
 }

@@ -14,7 +14,7 @@ public class Main {
 
 
     /**
-     * The main function of the program.
+     * The Main function of the program.
      * This is where all methods and objects are applied.
      */
     public static void main(String[] args) throws MobileException {
@@ -27,15 +27,15 @@ public class Main {
             mobil_htc.callContact("Iulian");
             mobil_htc.getMobileInfo();
             mobil_htc.printContactNumber("Mihai");
-            //mobil_nokia.getMobileInfo();
+            mobil_nokia.getMobileInfo();
             mobil_nokia.testForWirelessConnection();
             mobil_htc.testForWirelessConnection();
             mobil_htc.chargeBattery();
             mobil_nokia.chargeBattery();
             mobil_htc.sendMessage("Politia");
             mobil_htc.callContact("Salvare");
-            mobil_htc.set_Power_ON(false);
-            mobil_htc.printContactNumber("Giulia");// first exception
+            mobil_htc.setPowerON(false);
+            mobil_htc.printContactNumber("Giulia");// first exception: the device is turned off and cannot perform actions
 
 
         } catch (Exception e) {
@@ -43,26 +43,25 @@ public class Main {
         } finally {
 
             try {
-                mobil_htc.set_Power_ON(true);
-                //   mobil_htc.printContactNumber("Giulia"); // second exception
+                mobil_htc.setPowerON(true);
+                mobil_htc.printContactNumber("Giulia");
                 mobil_htc.callContact("Ajutor");
-                // mobil_htc.callContact("Mirel"); // third exception
+                // mobil_htc.callContact("Mirel"); // second exception: contact does not exist
                 mobil_htc.getMobileInfo();
                 mobil_htc.getMobileInfo();
-                mobil_htc.getMobileInfo();
-                mobil_htc.getMobileInfo();
-                //   mobil_htc.callContact("Ajutor"); //fourth exception
+                // mobil_htc.callContact("Ajutor"); //third exception: battery level too low to perform this action;
                 mobil_htc.chargeBattery();
                 mobil_htc.chargeBattery();
-                mobil_htc.set_Power_ON(true);
+                mobil_htc.setPowerON(true);
                 mobil_htc.callContact("Ajutor");
                 mobil_nokia.sendMessage("Politia");
                 mobil_nokia.callContact("Salvare");
-                mobil_nokia.set_Power_ON(false);
-                //  mobil_nokia.printContactNumber("Giulia"); //fifth exception
-                mobil_nokia.set_Power_ON(true);
+                mobil_nokia.setPowerON(false);
+                // mobil_nokia.printContactNumber("Giulia"); //fourth exception: the device is turned off and cannot perform actions
+                mobil_nokia.setPowerON(true);
                 mobil_nokia.printContactNumber("Giulia");
                 mobil_nokia.callContact("Ajutor");
+                System.out.println("Sfarsit testare.");
 
             } catch (Exception e) {
                 e.printStackTrace();

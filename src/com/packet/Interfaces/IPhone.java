@@ -41,4 +41,10 @@ public interface IPhone {
      */
     public int printContactNumber(String contactName) throws MobileException;
 
+    /**
+     * Tests the battery level and checks the device to see if it's powered on;
+     * @throws MobileException if battery level is too low to perform the action or if the device is powered off;
+     */
+    public void testForMobileException() throws MobileException;
+
 }

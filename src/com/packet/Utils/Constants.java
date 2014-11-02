@@ -20,7 +20,7 @@ public class Constants {
     public static final String SUCCES_CALL_NOKIA = "The following contact has been called from a Nokia: ";
     public static final String SUCCES_MESSAGE = "The following contact has been messaged: ";
     public static final String SUCCES_PHONE_NUMBER = "The following contact has a valid phone number: ";
-    public static final String ERROR_CONTACT_NAME = "The specified contact does not exist!";
+    public static final String ERROR_CONTACT_NAME = "The specified contact does not have a phone number in the agenda!";
     public static final int BATTERY_CHARGE_VALUE = 17;
     public static final int BATTERY_HTC_DISCHARGE_VALUE = 15;
     public static final int BATTERY_NOKIA_DISCHARGE_VALUE = 7;
